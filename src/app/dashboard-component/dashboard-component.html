@@ -1,0 +1,64 @@
+<div class="dashboard-container">
+  <nav class="navbar">
+    <div class="logo">DROP <span>HOUSE</span></div>
+    <ul class="nav-links">
+      <li class="active">Inicio</li>
+      <li>Catálogo</li>
+    </ul>
+    <div class="profile-btn">
+      <ul class="nav-links">
+        <li>
+          <div class="cart">🛒</div>
+        </li>
+        <li>
+          <a routerLink="/register-login-component">
+            <button class="login-btn">LogIn</button>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <main class="content">
+    <section class="hero-section">
+      <div class="hero-info">
+        <span class="badge pulse">{{ products.status }}</span>
+        <h1>{{ products.name }}</h1>
+        <p class="brand">{{ products.brand }}</p>
+        <div class="price-action">
+          <span class="price">${{ products.price }}</span>
+          <button class="primary-btn">Añadir al Carrito</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="glow-bg"></div>
+        <img [src]="products.image" alt="Featured Sneaker" class="floating">
+      </div>
+    </section>
+
+    <section class="trending-section">
+      <div class="section-header">
+        <h2>Disponibles</h2>
+        <a href="#" class="view-all">Ver Todo</a>
+      </div>
+
+      <div class="sneaker-grid">
+        <div class="sneaker-card" *ngFor="let sneaker of sneakers">
+
+          <div class="card-image">
+            <img [src]="sneaker.image" [alt]="sneaker.name">
+          </div>
+          <div class="card-info">
+            <p class="brand">{{ sneaker.brand }}</p>
+            <h3>{{ sneaker.name }}</h3>
+            <div class="card-footer">
+              <span class="price">${{ sneaker.price }}</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

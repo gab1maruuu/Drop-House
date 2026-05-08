@@ -1,21 +1,21 @@
 import { TestBed } from '@angular/core/testing';
-import { App } from './app';
+import { RegisterLoginComponent } from './register-login';
 
-describe('App', () => {
+describe('RegisterLoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [RegisterLoginComponent],
     }).compileComponents();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
+    const fixture = TestBed.createComponent(RegisterLoginComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
+    const fixture = TestBed.createComponent(RegisterLoginComponent);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-a');
