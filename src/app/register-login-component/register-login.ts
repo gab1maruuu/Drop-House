@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { login, register, logout, getCurrentUser } from '../../services/auth';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-register-login',
   imports: [RouterOutlet, FormsModule, CommonModule],
