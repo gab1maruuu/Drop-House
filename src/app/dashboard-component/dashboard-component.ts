@@ -2,10 +2,12 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { supabase } from '../../lib/supabaseClient';
 import { RouterLink } from '@angular/router';
+import { Header } from '../header-component/header';
+import { Footer } from '../footer-component/footer';
 
 @Component({
   selector: 'app-dashboard-component',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, Header, Footer],
   templateUrl: './dashboard-component.html',
   styleUrl: './dashboard-component.css',
 })

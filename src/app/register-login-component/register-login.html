@@ -1,111 +1,58 @@
-<main class="main-container">
-  <div class="glass-background"></div>
-  
-  <div class="content-wrapper">
-    <!-- Logged Out View: Login/Register Card -->
-    <div *ngIf="!user()" class="auth-card animate-fade-in">
-      <div class="auth-header">
-        <h1 class="brand-title">Drop House</h1>
-        <p class="brand-subtitle">{{ isLoginMode() ? 'Bienvenido de nuevo' : 'Crea tu cuenta' }}</p>
-      </div>
-
-      <form (submit)="handleSubmit(); $event.preventDefault()" class="auth-form">
-        <div class="input-group" *ngIf="!isLoginMode()">
-          <label for="fullName">Nombre Completo</label>
-          <input 
-            type="text" 
-            id="fullName" 
-            name="fullName"
-            placeholder="John Doe" 
-            [ngModel]="fullName()" 
-            (ngModelChange)="fullName.set($event)"
-            required
-          />
+<div class="page-container">
+  <app-header></app-header>
+  <main class="main-container">
+    <div class="content-wrapper">
+      <!-- Logged Out View: Login/Register Card -->
+      <div *ngIf="!user()" class="auth-card animate-fade-in">
+        <div class="auth-header">
+          <h1 class="brand-title">Drop House</h1>
+          <p class="brand-subtitle">{{ isLoginMode() ? 'Bienvenido de nuevo' : 'Crea tu cuenta' }}</p>
         </div>
 
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email"
-            placeholder="name@example.com" 
-            [ngModel]="email()" 
-            (ngModelChange)="email.set($event)"
-            required
-          />
-        </div>
+        <form (ngSubmit)="handleSubmit()" class="auth-form">
+          <div class="input-group" *ngIf="!isLoginMode()">
+            <label for="fullName">Nombre Completo</label>
+            <input type="text" id="fullName" name="fullName" placeholder="John Doe" [ngModel]="fullName()"
+              (ngModelChange)="fullName.set($event)" required />
+          </div>
 
-        <div class="input-group">
-          <label for="password">Contraseña</label>
-          <input 
-            type="password" 
-            id="password" 
-            name="password"
-            placeholder="••••••••" 
-            [ngModel]="password()" 
-            (ngModelChange)="password.set($event)"
-            required
-          />
-        </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="name@example.com" [ngModel]="email()"
+              (ngModelChange)="email.set($event)" required />
+          </div>
 
-        <div *ngIf="errorMessage()" class="error-banner">
-          {{ errorMessage() }}
-        </div>
+          <div class="input-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" [ngModel]="password()"
+              (ngModelChange)="password.set($event)" required />
+          </div>
 
-        <button type="submit" class="primary-btn" [disabled]="loading()">
-          <span *ngIf="!loading()">{{ isLoginMode() ? 'Iniciar Sesión' : 'Registrarse' }}</span>
-          <span *ngIf="loading()" class="spinner"></span>
-        </button>
-      </form>
+          <div *ngIf="errorMessage()" class="error-banner">
+            {{ errorMessage() }}
+          </div>
+          
+          <div *ngIf="successMessage()" class="success-banner">
+            {{ successMessage() }}
+          </div>
 
-      <div class="auth-footer">
-        <p>
-          {{ isLoginMode() ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?' }}
-          <button (click)="toggleMode()" class="link-btn">
-            {{ isLoginMode() ? 'Crea una ahora' : 'Inicia sesión' }}
+          <button type="submit" class="primary-btn" [disabled]="loading()">
+            <span *ngIf="!loading()">{{ isLoginMode() ? 'Iniciar Sesión' : 'Registrarse' }}</span>
+            <span *ngIf="loading()" class="spinner"></span>
           </button>
-        </p>
-      </div>
-    </div>
+        </form>
 
-    <!-- Logged In View: Dashboard -->
-    <div *ngIf="user()" class="dashboard animate-fade-in">
-      <header class="dashboard-header">
-        <div class="user-profile">
-          <div class="avatar">{{ user().email[0].toUpperCase() }}</div>
-          <div class="user-info">
-            <h3>{{ user().user_metadata?.full_name || 'Usuario' }}</h3>
-            <span class="role-badge" [class.admin]="user().user_metadata?.role === 'admin'">
-              {{ user().user_metadata?.role || 'Guest' }}
-            </span>
-          </div>
-        </div>
-        <button (click)="handleLogout()" class="secondary-btn">Cerrar Sesión</button>
-      </header>
-
-      <section class="dashboard-content">
-        <h2>Panel de Control</h2>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-label">Estado de Cuenta</span>
-            <span class="stat-value">Activa</span>
-          </div>
-          <div class="stat-card" *ngIf="user().user_metadata?.role === 'admin'">
-            <span class="stat-label">Acceso Admin</span>
-            <span class="stat-value">Concedido</span>
-          </div>
-        </div>
-
-        <div class="welcome-message">
-          <p>Has iniciado sesión correctamente como <strong>{{ user().email }}</strong>.</p>
-          <p *ngIf="user().user_metadata?.role === 'admin'" class="admin-notice">
-            Tienes permisos de administrador. El panel de gestión está listo.
+        <div class="auth-footer">
+          <p>
+            {{ isLoginMode() ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?' }}
+            <button (click)="toggleMode()" class="link-btn">
+              {{ isLoginMode() ? 'Crea una ahora' : 'Inicia sesión' }}
+            </button>
           </p>
         </div>
-      </section>
+      </div>
     </div>
-  </div>
-</main>
-
+  </main>
+  <app-footer></app-footer>
+</div>
 <router-outlet />
