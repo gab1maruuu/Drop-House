@@ -1,1 +1,119 @@
-<p>catalogo-component works!</p>
+<section class="header-section">
+  <div class="dashboard-container">
+    <app-header></app-header>
+  </div>
+</section>
+
+<main class="catalog-main">
+  <div class="dashboard-container">
+
+    <!-- Título de página -->
+    <div class="catalog-hero">
+      <h1>Catálogo</h1>
+      <p class="catalog-subtitle">{{ filteredProducts.length }} producto{{ filteredProducts.length !== 1 ? 's' : '' }} encontrado{{ filteredProducts.length !== 1 ? 's' : '' }}</p>
+    </div>
+
+    <!-- Barra de búsqueda + ordenar -->
+    <div class="toolbar">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          placeholder="Buscar zapatillas, marcas..."
+          [(ngModel)]="searchQuery"
+          (input)="onSearch()"
+          id="catalog-search"
+        />
+      </div>
+
+      <div class="sort-select-wrapper">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="6" y1="12" x2="18" y2="12"></line>
+          <line x1="9" y1="18" x2="15" y2="18"></line>
+        </svg>
+        <select [(ngModel)]="sortBy" (change)="onSortChange()" id="catalog-sort">
+          <option value="default">Más recientes</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="name">Nombre A-Z</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Filtros de categoría -->
+    <div class="category-filters">
+      <button
+        *ngFor="let cat of categories"
+        class="filter-chip"
+        [class.active]="selectedCategory === cat"
+        (click)="selectCategory(cat)"
+        [id]="'filter-' + cat">
+        {{ cat }}
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="catalog-loading">
+      <div class="spinner"></div>
+      <p>Cargando productos...</p>
+    </div>
+
+    <!-- Grid de productos -->
+    <div class="products-grid" *ngIf="!loading">
+      <div class="product-card" *ngFor="let product of filteredProducts">
+        <div class="card-img-wrap">
+          <span class="cat-tag" *ngIf="product.category">{{ product.category }}</span>
+          <span class="stock-tag out" *ngIf="product.status === 'Proximamente'">Próximamente</span>
+          <img [src]="product.image" [alt]="product.name" loading="lazy" />
+        </div>
+        <div class="card-body">
+          <p class="brand-label">{{ product.brand }}</p>
+          <h3 class="product-name">{{ product.name }}</h3>
+          <p class="product-desc" *ngIf="product.description">{{ product.description }}</p>
+          <div class="card-footer-row">
+            <span class="price-tag">${{ product.price }}</span>
+            <button
+              class="add-btn"
+              [class.added]="addedMap[product.id]"
+              [disabled]="product.status === 'Proximamente'"
+              (click)="addToCart(product)"
+              [id]="'add-' + product.id">
+              <span *ngIf="!addedMap[product.id]">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                Añadir
+              </span>
+              <span *ngIf="addedMap[product.id]">✓ Añadido</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sin resultados -->
+      <div class="no-results" *ngIf="filteredProducts.length === 0">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <h3>Sin resultados</h3>
+        <p>Prueba con otro término o cambia el filtro.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<section class="footer-section">
+  <div class="dashboard-container">
+    <app-footer></app-footer>
+  </div>
+</section>

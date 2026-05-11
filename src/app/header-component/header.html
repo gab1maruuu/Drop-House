@@ -1,19 +1,22 @@
 <nav class="navbar">
   <div routerLink="/" class="logo"><span>DROP</span> HOUSE</div>
   <ul class="nav-links">
-    <li routerLink="/" class="active">Inicio</li>
-    <li>Catálogo</li>
+    <li routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</li>
+    <li routerLink="/catalogo" routerLinkActive="active">Catálogo</li>
   </ul>
   <div class="profile-btn">
     <ul class="nav-links">
       <li>
-        <div class="cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
+        <div class="cart-wrapper">
+          <div class="cart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+          </div>
+          <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
         </div>
       </li>
       <li *ngIf="!isLoggedIn">

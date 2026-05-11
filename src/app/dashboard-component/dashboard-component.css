@@ -278,6 +278,7 @@
 
 .card-footer {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -285,6 +286,31 @@
   font-size: 1.1rem;
   font-weight: 800;
   color: #000;
+}
+
+.add-to-cart-btn {
+  background: #0f1115;
+  color: #fff;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+  background: #ff4a3d;
+  transform: translateY(-2px);
+}
+
+.add-to-cart-btn.added {
+  background: #22c55e;
+  transform: scale(1.05);
 }
 
 /* Categories Section */

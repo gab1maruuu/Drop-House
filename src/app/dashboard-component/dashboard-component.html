@@ -6,11 +6,10 @@
   <div class="dashboard-container">
     <section class="hero-section">
       <div class="hero-info">
-        <span class="collection-badge">NUEVA COLECCIÓN 2026</span>
         <h1>Las mejores<br>zapatillas,<br><span class="text-grey">a tu medida</span></h1>
         <p class="hero-desc">Running, basketball, lifestyle y training.<br>Encuentra tu par perfecto.</p>
         <div class="hero-actions">
-          <button class="btn-primary">Ver catálogo</button>
+          <button routerLink="/catalogo" class="btn-primary">Ver catálogo</button>
           <button class="btn-secondary">Novedades &rarr;</button>
         </div>
       </div>
@@ -35,6 +34,18 @@
             <h3>{{ sneaker.name }}</h3>
             <div class="card-footer">
               <span class="price">${{ sneaker.price }}</span>
+              <button class="add-to-cart-btn" [class.added]="addedMap[sneaker.id]" (click)="addToCart(sneaker)">
+                <span *ngIf="!addedMap[sneaker.id]">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                  Añadir
+                </span>
+                <span *ngIf="addedMap[sneaker.id]">✓ Añadido</span>
+              </button>
             </div>
           </div>
         </div>

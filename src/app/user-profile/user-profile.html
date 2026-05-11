@@ -1,51 +1,93 @@
-<div class="dashboard-container">
-  <app-header></app-header>
-</div>
+<section class="header-section">
+  <div class="dashboard-container">
+    <app-header></app-header>
+  </div>
+</section>
 
 <main class="profile-content">
   <div class="dashboard-container">
     <div class="profile-card">
+
+      <!-- Avatar + nombre -->
       <div class="profile-header">
         <div class="avatar">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
+          {{ userInitials || '?' }}
         </div>
-        <h2>Mi Perfil</h2>
+        <div class="profile-titles">
+          <h2>{{ userName || 'Mi Perfil' }}</h2>
+          <p class="member-since">Miembro desde {{ memberSince }}</p>
+        </div>
       </div>
 
-      <div class="profile-info">
-        <p class="label">Correo electrónico</p>
-        <p class="value">{{ userEmail }}</p>
+      <!-- Info: nombre y correo -->
+      <div class="info-grid">
+        <div class="info-block">
+          <p class="label">Nombre</p>
+          <p class="value">{{ userName || '—' }}</p>
+        </div>
+        <div class="info-block">
+          <p class="label">Correo electrónico</p>
+          <p class="value">{{ userEmail }}</p>
+        </div>
       </div>
 
+      <!-- Pedidos -->
       <div class="orders-section">
-        <h3>Mis Pedidos</h3>
-        <div class="orders-list">
+        <div class="orders-title-row">
+          <h3>Mis Pedidos</h3>
+          <span class="orders-count" *ngIf="!loadingOrders">
+            {{ orders.length }} pedido{{ orders.length !== 1 ? 's' : '' }}
+          </span>
+        </div>
+
+        <!-- Cargando -->
+        <div *ngIf="loadingOrders" class="orders-loading">
+          <div class="spinner"></div>
+          <p>Cargando pedidos...</p>
+        </div>
+
+        <!-- Lista de pedidos -->
+        <div class="orders-list" *ngIf="!loadingOrders">
           <div class="order-item" *ngFor="let order of orders">
             <div class="order-header">
-              <span class="order-id">{{ order.id }}</span>
+              <span class="order-id">{{ order.displayId }}</span>
               <span class="order-date">{{ order.date }}</span>
             </div>
             <div class="order-details">
+              <span class="order-items-count">{{ order.items }} artículo{{ order.items !== 1 ? 's' : '' }}</span>
               <span class="order-total">${{ order.total }}</span>
-              <span class="order-status"
-                [ngClass]="{'status-delivered': order.status === 'Entregado', 'status-pending': order.status === 'En camino'}">{{
-                order.status }}</span>
+              <span class="order-status" [ngClass]="getStatusClass(order.status)">
+                {{ getStatusLabel(order.status) }}
+              </span>
             </div>
           </div>
+
           <div *ngIf="orders.length === 0" class="no-orders">
-            No tienes pedidos recientes.
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity:0.3">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <p>No tienes pedidos todavía.</p>
           </div>
         </div>
       </div>
 
-      <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+      <button class="logout-btn" (click)="logout()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        Cerrar sesión
+      </button>
+
     </div>
   </div>
 </main>
 
-<div class="dashboard-container">
-  <app-footer></app-footer>
-</div>
+<section class="footer-section">
+  <div class="dashboard-container">
+    <app-footer></app-footer>
+  </div>
+</section>

@@ -45,6 +45,12 @@
   color: #fff;
 }
 
+.cart-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .cart {
   color: #fff;
   cursor: pointer;
@@ -55,6 +61,31 @@
 
 .cart:hover {
   opacity: 0.8;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: linear-gradient(135deg, #ff4a3d, #ff2a5f);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  box-shadow: 0 2px 8px rgba(255, 74, 61, 0.5);
+  animation: badge-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
 }
 
 .profile-btn .nav-links {

@@ -2,8 +2,10 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { supabase } from '../../lib/supabaseClient';
 import { RouterLink } from '@angular/router';
+
 import { Header } from '../header-component/header';
 import { Footer } from '../footer-component/footer';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-dashboard-component',
@@ -14,8 +16,9 @@ import { Footer } from '../footer-component/footer';
 export class DashboardComponent implements OnInit {
   products: any = {};
   sneakers: any[] = [];
+  addedMap: { [id: number]: boolean } = {};
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef, private cartService: CartService) { }
 
   async ngOnInit() {
     await this.fetchData();
@@ -36,14 +39,22 @@ export class DashboardComponent implements OnInit {
         ...item,
         image: item.image_url,
         status: item.is_active ? 'Disponible' : 'Proximamente',
-
       }));
 
       this.products = mappedData[0];
       this.sneakers = mappedData.slice(1);
 
-      // Forzar la actualización de la vista en Angular
       this.cdr.detectChanges();
     }
+  }
+
+  addToCart(sneaker: any) {
+    this.cartService.addItem();
+    this.addedMap[sneaker.id] = true;
+    setTimeout(() => {
+      this.addedMap[sneaker.id] = false;
+      this.cdr.detectChanges();
+    }, 1500);
+    this.cdr.detectChanges();
   }
 }
