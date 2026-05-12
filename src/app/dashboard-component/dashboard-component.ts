@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { supabase } from '../../lib/supabaseClient';
 import { RouterLink } from '@angular/router';
-
 import { Header } from '../header-component/header';
 import { Footer } from '../footer-component/footer';
 import { CartService } from '../../services/cart.service';
@@ -17,11 +16,17 @@ export class DashboardComponent implements OnInit {
   products: any = {};
   sneakers: any[] = [];
   addedMap: { [id: number]: boolean } = {};
+  isAdmin = false;
 
   constructor(private cdr: ChangeDetectorRef, private cartService: CartService) { }
 
   async ngOnInit() {
     await this.fetchData();
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      this.isAdmin = session.user.user_metadata?.['role'] === 'admin';
+    }
+    this.cdr.detectChanges();
   }
 
   async fetchData() {
@@ -49,7 +54,7 @@ export class DashboardComponent implements OnInit {
   }
 
   addToCart(sneaker: any) {
-    this.cartService.addItem();
+    this.cartService.addItem(sneaker);
     this.addedMap[sneaker.id] = true;
     setTimeout(() => {
       this.addedMap[sneaker.id] = false;

@@ -7,30 +7,6 @@
 <main class="profile-content">
   <div class="dashboard-container">
     <div class="profile-card">
-
-      <!-- Avatar + nombre -->
-      <div class="profile-header">
-        <div class="avatar">
-          {{ userInitials || '?' }}
-        </div>
-        <div class="profile-titles">
-          <h2>{{ userName || 'Mi Perfil' }}</h2>
-          <p class="member-since">Miembro desde {{ memberSince }}</p>
-        </div>
-      </div>
-
-      <!-- Info: nombre y correo -->
-      <div class="info-grid">
-        <div class="info-block">
-          <p class="label">Nombre</p>
-          <p class="value">{{ userName || '—' }}</p>
-        </div>
-        <div class="info-block">
-          <p class="label">Correo electrónico</p>
-          <p class="value">{{ userEmail }}</p>
-        </div>
-      </div>
-
       <!-- Pedidos -->
       <div class="orders-section">
         <div class="orders-title-row">
@@ -63,7 +39,8 @@
           </div>
 
           <div *ngIf="orders.length === 0" class="no-orders">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity:0.3">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+              style="opacity:0.3">
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <path d="M16 10a4 4 0 0 1-8 0"></path>
@@ -74,7 +51,8 @@
       </div>
 
       <button class="logout-btn" (click)="logout()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
           <polyline points="16 17 21 12 16 7"></polyline>
           <line x1="21" y1="12" x2="9" y2="12"></line>

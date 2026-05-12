@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { supabase } from '../../lib/supabaseClient';
 import { CartService } from '../../services/cart.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, CommonModule],
-  templateUrl: './header.html',
-  styleUrl: './header.css',
+  selector: 'app-header-admin',
+  imports: [CommonModule, RouterLink, RouterLinkActive],
+  templateUrl: './header-admin.html',
+  styleUrl: './header-admin.css',
 })
-export class Header implements OnInit, OnDestroy {
+export class HeaderAdminComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   isAdmin = false;
   cartCount = 0;
@@ -25,19 +25,12 @@ export class Header implements OnInit, OnDestroy {
     this.isLoggedIn = !!session;
     if (session?.user) {
       this.isAdmin = session.user.user_metadata?.['role'] === 'admin';
-      console.log('Header: User is logged in. Role:', session.user.user_metadata?.['role']);
-      console.log('Header: isAdmin set to', this.isAdmin);
     }
-    this.cdr.detectChanges(); // forzar actualización tras el await
+    this.cdr.detectChanges();
 
-    supabase.auth.onAuthStateChange(async (_event, session) => {
+    supabase.auth.onAuthStateChange((_event, session) => {
       this.isLoggedIn = !!session;
-      if (session?.user) {
-        this.isAdmin = session.user.user_metadata?.['role'] === 'admin';
-        console.log('Header AuthChange: Role:', session.user.user_metadata?.['role']);
-      } else {
-        this.isAdmin = false;
-      }
+      this.isAdmin = !!session?.user && session.user.user_metadata?.['role'] === 'admin';
       this.cdr.detectChanges();
     });
 

@@ -1,0 +1,259 @@
+.admin-layout {
+  background-color: #0f1115;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.admin-header {
+  background-color: #161920;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem 0;
+}
+
+.admin-header .admin-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-logo {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.admin-logo span {
+  font-weight: 800;
+  color: #ff4a3d;
+}
+
+.admin-logo small {
+  font-size: 0.8rem;
+  color: #888;
+  margin-left: 5px;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 15px;
+}
+
+.admin-nav button {
+  background: transparent;
+  border: none;
+  color: #a0a0a0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.admin-nav button:hover,
+.admin-nav button.active {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.admin-nav button.active {
+  border-bottom: 2px solid #ff4a3d;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Content */
+.admin-content {
+  padding: 40px 0;
+}
+
+.section-header {
+  margin-bottom: 30px;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 992px) {
+  .admin-grid {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.admin-card {
+  background-color: #161920;
+  border-radius: 12px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  height: fit-content;
+}
+
+.admin-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #ff4a3d;
+  outline: none;
+}
+
+.form-group.checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.form-group.checkbox input {
+  width: 18px;
+  height: 18px;
+}
+
+/* Tables */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th, td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+th {
+  color: #888;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+td {
+  font-size: 0.95rem;
+}
+
+tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Badges */
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.status-badge.active {
+  background-color: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+}
+
+.status-badge:not(.active) {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #ff4a3d, #ff2a5f);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 74, 61, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #fff;
+}
+
+/* Statuses for orders in table */
+.status-badge.pending { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+.status-badge.processing { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+.status-badge.shipped { background: rgba(168, 85, 247, 0.12); color: #a855f7; }
+.status-badge.delivered { background: rgba(34, 197, 94, 0.12); color: #22c55e; }
+.status-badge.cancelled { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
+
+select {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 5px;
+}

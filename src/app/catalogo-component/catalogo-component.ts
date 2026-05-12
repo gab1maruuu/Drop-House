@@ -103,7 +103,7 @@ export class CatalogoComponent implements OnInit {
   }
 
   addToCart(product: any) {
-    this.cartService.addItem();
+    this.cartService.addItem(product);
     this.addedMap[product.id] = true;
     setTimeout(() => {
       this.addedMap[product.id] = false;

@@ -1,0 +1,248 @@
+.cart-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 70vh;
+  color: #fff;
+}
+
+.cart-header {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 20px;
+}
+
+.cart-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.cart-header p {
+  color: #888;
+}
+
+.cart-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 992px) {
+  .cart-content {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 80px 2fr 1fr 1fr auto;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.cart-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.item-image img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.item-brand {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.item-price {
+  font-weight: 600;
+  color: #fff;
+}
+
+.item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-quantity button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.item-quantity button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.item-quantity button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.item-total {
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-align: right;
+}
+
+.item-remove button {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.item-remove button:hover {
+  background: rgba(255, 77, 77, 0.1);
+}
+
+.cart-summary {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  height: fit-content;
+}
+
+.cart-summary h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  color: #aaa;
+}
+
+.summary-row.total {
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.checkout-btn {
+  width: 100%;
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  margin-top: 20px;
+}
+
+.checkout-btn:hover:not(:disabled) {
+  background: #e6e6e6;
+  transform: translateY(-2px);
+}
+
+.checkout-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.empty-cart-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;
+}
+
+.empty-cart-state svg {
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-cart-state h2 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.empty-cart-state p {
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #e6e6e6;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .cart-item {
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 15px;
+  }
+  
+  .item-quantity {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+  
+  .item-total {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+  
+  .item-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .cart-item {
+    position: relative;
+  }
+}

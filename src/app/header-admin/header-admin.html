@@ -3,8 +3,8 @@
   <ul class="nav-links">
     <li routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</li>
     <li routerLink="/catalogo" routerLinkActive="active">Catálogo</li>
-    <li *ngIf="isAdmin" routerLink="/admin" [queryParams]="{tab: 'productos'}" routerLinkActive="active">Productos Admin</li>
-    <li *ngIf="isAdmin" routerLink="/admin" [queryParams]="{tab: 'pedidos'}" routerLinkActive="active">Pedidos Admin</li>
+    <li routerLink="/admin" [queryParams]="{tab: 'productos'}" routerLinkActive="active">Productos Admin</li>
+    <li routerLink="/admin" [queryParams]="{tab: 'pedidos'}" routerLinkActive="active">Pedidos Admin</li>
   </ul>
   <div class="profile-btn">
     <ul class="nav-links">
@@ -29,8 +29,7 @@
       <li *ngIf="isLoggedIn" class="auth-links">
         <a routerLink="/user-profile" title="Mi Perfil">
           <button class="profile-icon-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
               <circle cx="12" cy="7" r="4"></circle>
             </svg>
